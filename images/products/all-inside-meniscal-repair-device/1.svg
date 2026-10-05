@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600" role="img" aria-label="All-Inside Meniscal Repair Device placeholder image">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f3efe4"/><stop offset="1" stop-color="#ddd5bf"/></linearGradient>
+    <radialGradient id="glow" cx="50%" cy="45%" r="45%"><stop offset="0" stop-color="#b27f0d" stop-opacity=".22"/><stop offset="1" stop-color="#b27f0d" stop-opacity="0"/></radialGradient>
+    <pattern id="dots" width="24" height="24" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1.2" fill="#b27f0d" fill-opacity=".18"/></pattern>
+  </defs>
+  <rect width="800" height="600" fill="url(#bg)"/>
+  <rect width="800" height="600" fill="url(#dots)"/>
+  <circle cx="400" cy="250" r="230" fill="url(#glow)"/>
+  <circle cx="400" cy="250" r="150" fill="none" stroke="#b27f0d" stroke-opacity=".35" stroke-dasharray="3 10"/>
+  <g transform="translate(300 150) scale(2)" fill="none" stroke="#b27f0d" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M50 14c-7 0-12 5-12 12s5 12 12 12 12-5 12-12-5-12-12-12z"/><path d="M50 38v48"/><path d="M40 46l20 6M40 56l20 6M40 66l20 6M40 76l20 6"/><path d="M44 86l6 8 6-8"/></g>
+  <rect x="604" y="32" width="164" height="30" rx="15" fill="none" stroke="#b27f0d" stroke-opacity=".7"/>
+  <text x="686" y="52" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" letter-spacing="2" fill="#b27f0d">PLACEHOLDER 1</text>
+  <text x="48" y="500" font-family="Arial, sans-serif" font-size="15" font-weight="700" letter-spacing="3" fill="#b27f0d">IPSUM ORTHO · SPORTS MEDICINE</text>
+  <text x="48" y="542" font-family="Arial, sans-serif" font-size="30" font-weight="700" fill="#2b2823">All-Inside Meniscal Repair Device</text>
+  <text x="48" y="572" font-family="Arial, sans-serif" font-size="14" fill="#6b6456">IO-SM-104 — replace with product photo</text>
+</svg>

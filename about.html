@@ -193,7 +193,7 @@
     <!-- Leadership -->
     <section class="section section--sand-light">
       <div class="container duo duo--wide-text">
-        <div class="duo__text leader" data-reveal>
+        <div class="duo__text md-message" data-reveal>
           <svg class="leader__quote" viewBox="0 0 64 48" width="56" height="42" aria-hidden="true"><path fill="currentColor" d="M0 48V28C0 12 8 2 24 0l3 7C18 9 14 15 14 22h12v26H0zm36 0V28C36 12 44 2 60 0l3 7c-9 2-13 8-13 15h12v26H36z"/></svg>
           <h2 class="heading">Our Leadership <span class="gold">Speaks</span></h2>
           <p>AVANA Medical Devices is committed to bringing <strong>advanced medical technologies, innovative therapy solutions and world-class healthcare products</strong> to India. By combining cutting-edge solutions with clinical expertise, AVANA empowers surgeons and healthcare professionals with the tools, knowledge and support needed to deliver better clinical outcomes.</p>
@@ -207,6 +207,101 @@
           </div>
           <figcaption><strong>Mr. P. Sundararajan</strong><span>Managing Director</span></figcaption>
         </figure>
+      </div>
+    </section>
+
+    <!-- Leadership team
+         Dummy content: replace names, roles, bios and the photos in images/leadership/ (portrait, 4:5, e.g. 600x750).
+         To add or remove a leader, add/remove both the <li> in .team__names and the matching <li class="leader">, then update --count. -->
+    <section class="team" id="leadership" data-team aria-labelledby="teamTitle">
+      <div class="team__track" style="--count: 5">
+        <div class="team__sticky">
+          <div class="container team__inner">
+            <div class="team__side">
+              <p class="eyebrow">Leadership Team</p>
+              <h2 class="heading heading--light" id="teamTitle">Meet the People <span class="gold">Leading Avana</span></h2>
+              <ol class="team__names" aria-label="Leaders">
+              <li><button class="team__name" type="button" data-go="0" aria-current="true">Lorem Ipsum<span>Chief Executive Officer</span></button></li>
+              <li><button class="team__name" type="button" data-go="1" aria-current="false">Dolor Sitamet<span>Chief Operating Officer</span></button></li>
+              <li><button class="team__name" type="button" data-go="2" aria-current="false">Consectetur Adipiscing<span>Chief Financial Officer</span></button></li>
+              <li><button class="team__name" type="button" data-go="3" aria-current="false">Sed Eiusmod<span>Head of Medical Education</span></button></li>
+              <li><button class="team__name" type="button" data-go="4" aria-current="false">Tempor Incididunt<span>Head of Sales &amp; Marketing</span></button></li>
+              </ol>
+              <div class="team__progress" aria-hidden="true">
+                <span class="team__count"><b data-team-now>01</b> / 05</span>
+                <span class="team__bar"><i data-team-bar></i></span>
+              </div>
+            </div>
+
+            <ol class="team__stage">
+            <li class="leader">
+              <figure class="leader__photo">
+                <img src="images/leadership/leader-1.svg" alt="Lorem Ipsum, Chief Executive Officer" width="600" height="750" loading="lazy">
+              </figure>
+              <div class="leader__text">
+                <span class="leader__num" aria-hidden="true">01</span>
+                <p class="leader__role">Chief Executive Officer</p>
+                <h3 class="leader__name">Lorem Ipsum</h3>
+                <p class="leader__since">With Avana since 2009</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Cras mattis consectetur purus sit amet fermentum.</p>
+                <p>Donec ullamcorper nulla non metus auctor fringilla. Nullam quis risus eget urna mollis ornare vel eu leo, maecenas faucibus mollis interdum.</p>
+              </div>
+            </li>
+            <li class="leader">
+              <figure class="leader__photo">
+                <img src="images/leadership/leader-2.svg" alt="Dolor Sitamet, Chief Operating Officer" width="600" height="750" loading="lazy">
+              </figure>
+              <div class="leader__text">
+                <span class="leader__num" aria-hidden="true">02</span>
+                <p class="leader__role">Chief Operating Officer</p>
+                <h3 class="leader__name">Dolor Sitamet</h3>
+                <p class="leader__since">With Avana since 2012</p>
+                <p>Vestibulum id ligula porta felis euismod semper. Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel scelerisque nisl consectetur et.</p>
+                <p>Curabitur blandit tempus porttitor. Etiam porta sem malesuada magna mollis euismod, morbi leo risus porta ac consectetur ac vestibulum at eros.</p>
+              </div>
+            </li>
+            <li class="leader">
+              <figure class="leader__photo">
+                <img src="images/leadership/leader-3.svg" alt="Consectetur Adipiscing, Chief Financial Officer" width="600" height="750" loading="lazy">
+              </figure>
+              <div class="leader__text">
+                <span class="leader__num" aria-hidden="true">03</span>
+                <p class="leader__role">Chief Financial Officer</p>
+                <h3 class="leader__name">Consectetur Adipiscing</h3>
+                <p class="leader__since">With Avana since 2014</p>
+                <p>Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Nulla vitae elit libero, a pharetra augue.</p>
+                <p>Maecenas sed diam eget risus varius blandit sit amet non magna. Sed posuere consectetur est at lobortis, aenean eu leo quam.</p>
+              </div>
+            </li>
+            <li class="leader">
+              <figure class="leader__photo">
+                <img src="images/leadership/leader-4.svg" alt="Sed Eiusmod, Head of Medical Education" width="600" height="750" loading="lazy">
+              </figure>
+              <div class="leader__text">
+                <span class="leader__num" aria-hidden="true">04</span>
+                <p class="leader__role">Head of Medical Education</p>
+                <h3 class="leader__name">Sed Eiusmod</h3>
+                <p class="leader__since">With Avana since 2016</p>
+                <p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cum sociis natoque penatibus et magnis dis parturient montes.</p>
+                <p>Nascetur ridiculus mus. Donec sed odio dui, integer posuere erat a ante venenatis dapibus posuere velit aliquet.</p>
+              </div>
+            </li>
+            <li class="leader">
+              <figure class="leader__photo">
+                <img src="images/leadership/leader-5.svg" alt="Tempor Incididunt, Head of Sales &amp; Marketing" width="600" height="750" loading="lazy">
+              </figure>
+              <div class="leader__text">
+                <span class="leader__num" aria-hidden="true">05</span>
+                <p class="leader__role">Head of Sales &amp; Marketing</p>
+                <h3 class="leader__name">Tempor Incididunt</h3>
+                <p class="leader__since">With Avana since 2018</p>
+                <p>Etiam porta sem malesuada magna mollis euismod. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>
+                <p>Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum, nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+              </div>
+            </li>
+            </ol>
+          </div>
+        </div>
       </div>
     </section>
 

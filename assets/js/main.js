@@ -206,6 +206,123 @@
   }
   document.querySelectorAll('canvas[data-network]').forEach(initNetwork);
 
+  // Leadership team: on wide screens the section pins and the leader cards stack
+  // as you scroll. Everything is scrubbed from scroll position, so it moves with the reader.
+  var team = document.querySelector('[data-team]');
+  if (team) {
+    var track = team.querySelector('.team__track');
+    var sticky = team.querySelector('.team__sticky');
+    var leaders = Array.prototype.slice.call(team.querySelectorAll('.leader'));
+    var names = team.querySelectorAll('.team__name');
+    var nowEl = team.querySelector('[data-team-now]');
+    var barEl = team.querySelector('[data-team-bar]');
+    var wide = window.matchMedia('(min-width: 861px) and (min-height: 600px)');
+    var last = leaders.length - 1;
+    var current = -1;
+    var headerH = 84;
+    var ticking = false;
+
+    function clamp(v, lo, hi) { return Math.min(hi, Math.max(lo, v)); }
+    function smooth(t) { return t * t * (3 - 2 * t); }
+
+    // 0..1 across the pinned stretch
+    function teamProgress() {
+      var scrollable = track.offsetHeight - sticky.offsetHeight;
+      return clamp((headerH - track.getBoundingClientRect().top) / scrollable, 0, 1);
+    }
+
+    // Each leader gets a stretch of scroll; the card holds still for the first 22%
+    // and last 14% of it so the bio can be read, and moves in between.
+    function stackPosition(raw) {
+      var i = Math.floor(raw);
+      if (i >= last) return last;
+      return i + smooth(clamp((raw - i - 0.22) / 0.64, 0, 1));
+    }
+
+    function markCurrent(i) {
+      if (i === current) return;
+      current = i;
+      names.forEach(function (el, k) { el.setAttribute('aria-current', String(k === i)); });
+      nowEl.textContent = (i < 9 ? '0' : '') + (i + 1);
+    }
+
+    function renderStack() {
+      ticking = false;
+      if (!team.classList.contains('team--scroll')) return;
+
+      var p = stackPosition(teamProgress() * last);
+      barEl.style.width = (p / last * 100).toFixed(2) + '%';
+      markCurrent(Math.round(p));
+
+      leaders.forEach(function (card, k) {
+        var d = k - p;   // >0: still below and arriving, <=0: on top or covered
+        var hidden = d >= 1 || d < -2.6;
+        card.style.visibility = hidden ? 'hidden' : 'visible';
+        card.setAttribute('aria-hidden', String(Math.round(p) !== k));
+        card.style.zIndex = k + 1;
+        if (hidden) return;
+
+        if (reduceMotion) {
+          card.style.visibility = Math.round(p) === k ? 'visible' : 'hidden';
+          return;
+        }
+
+        if (d > 0) {
+          // Arriving: slides up from below, photo drifts slower than the card, text fades up late
+          card.style.transform = 'translate3d(0,' + (d * 112).toFixed(2) + '%,0)';
+          card.style.setProperty('--shade', 0);
+          card.style.setProperty('--py', (-d * 18 - 12).toFixed(2) + '%');
+          card.style.setProperty('--to', clamp(1 - d * 2.2, 0, 1).toFixed(3));
+          card.style.setProperty('--ty', (d * 70).toFixed(1) + 'px');
+        } else {
+          // Covered: shrinks, lifts and dims, building a deck behind the current card
+          var depth = Math.max(d, -2);
+          card.style.transform = 'translate3d(0,' + (depth * 22).toFixed(1) + 'px,0) scale(' + (1 + depth * 0.05).toFixed(4) + ')';
+          card.style.setProperty('--shade', clamp(-d * 0.38, 0, 0.75).toFixed(3));
+          card.style.setProperty('--py', (-12 - d * 6).toFixed(2) + '%');
+          card.style.setProperty('--to', clamp(1 + d * 1.4, 0, 1).toFixed(3));
+          card.style.setProperty('--ty', '0px');
+        }
+      });
+    }
+
+    function onTeamScroll() {
+      if (!ticking) { ticking = true; requestAnimationFrame(renderStack); }
+    }
+
+    function setTeamMode() {
+      headerH = header.offsetHeight;
+      team.style.setProperty('--hh', headerH + 'px');
+      var on = wide.matches;
+      team.classList.toggle('team--scroll', on);
+      if (!on) {
+        // Stacked list: clear anything the scroll mode set
+        leaders.forEach(function (card) {
+          card.removeAttribute('style');
+          card.removeAttribute('aria-hidden');
+        });
+      }
+      current = -1;
+      renderStack();
+    }
+
+    // Clicking a name scrolls to the point where that leader's card has settled
+    names.forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var i = Number(btn.getAttribute('data-go'));
+        var scrollable = track.offsetHeight - sticky.offsetHeight;
+        var trackTop = window.scrollY + track.getBoundingClientRect().top - headerH;
+        var at = i === 0 ? 0 : (i - 1 + 0.92) / last;
+        window.scrollTo({ top: trackTop + scrollable * Math.min(at, 1) + 1, behavior: reduceMotion ? 'auto' : 'smooth' });
+      });
+    });
+
+    window.addEventListener('scroll', onTeamScroll, { passive: true });
+    window.addEventListener('resize', setTeamMode);
+    if (wide.addEventListener) wide.addEventListener('change', setTeamMode);
+    setTeamMode();
+  }
+
   // Enquiry form: validates, then hands the message to the visitor's email app
   var form = document.getElementById('contactForm');
   if (form) {
@@ -216,6 +333,12 @@
       { el: form.elements.message, ok: function (v) { return v.length > 3; } }
     ];
     var status = document.getElementById('cfStatus');
+
+    // Arriving from a product page's "Enquire" button: start the message for the visitor
+    var enquiry = new URLSearchParams(window.location.search).get('product');
+    if (enquiry && !form.elements.message.value) {
+      form.elements.message.value = 'I would like to know more about ' + enquiry + '.';
+    }
 
     function check(f) {
       var valid = f.ok(f.el.value.trim());
