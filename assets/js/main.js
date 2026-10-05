@@ -359,9 +359,14 @@
       var bad = fields.filter(function (f) { return !check(f); });
       if (bad.length) { bad[0].el.focus(); status.hidden = true; return; }
 
-      var v = function (n) { return form.elements[n].value.trim(); };
-      var body = v('message') + '\n\n' + v('name') + '\nMobile: ' + v('phone') + '\nEmail: ' + v('email');
-      window.location.href = 'mailto:info@avanamedical.com?subject=' + encodeURIComponent('Website enquiry from ' + v('name')) + '&body=' + encodeURIComponent(body);
+      // Optional fields only exist on some versions of the form (the Contact page has them)
+      var v = function (n) { return form.elements[n] ? form.elements[n].value.trim() : ''; };
+      var topic = v('topic');
+      var body = v('message') + '\n\n' + v('name') +
+        (v('organisation') ? '\n' + v('organisation') : '') +
+        '\nMobile: ' + v('phone') + '\nEmail: ' + v('email');
+      var subject = (topic || 'Website enquiry') + ' from ' + v('name');
+      window.location.href = 'mailto:info@avanamedical.com?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
       status.textContent = 'Your email app should open with this message ready to send. If it does not, write to info@avanamedical.com.';
       status.hidden = false;
     });

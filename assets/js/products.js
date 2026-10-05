@@ -196,7 +196,7 @@
         '<p class="lead">' + esc(p.summary) + '</p>' +
         '<ul class="checks">' + (p.features || []).map(function (f) { return '<li>' + esc(f) + '</li>'; }).join('') + '</ul>' +
         '<div class="pdp__actions">' +
-          '<a class="btn btn--gold" href="about.html?product=' + encodeURIComponent(p.name) + '#get-in-touch">Enquire about this product</a>' +
+          '<a class="btn btn--gold" href="contact.html?product=' + encodeURIComponent(p.name) + '#enquiry">Enquire about this product</a>' +
           '<a class="btn btn--outline" href="' + catLink + '">More ' + esc(cat.name) + '</a>' +
         '</div>' +
       '</div>' +

@@ -1077,6 +1077,98 @@ a.tag:hover { border-color: var(--primary); color: var(--primary-dark); }
   .job__panel { padding: 0 18px 22px; }
 }
 
+/* =====================================================================
+   Contact
+   ===================================================================== */
+
+/* Direct lines strip, overlapping the bottom of the hero */
+.contact-strip { position: relative; z-index: 2; margin-top: -44px; }
+.contact-strip__inner { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.contact-strip__inner > * { min-width: 0; }
+.contact-strip__item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 24px 26px;
+  background: var(--white);
+  color: inherit;
+  text-decoration: none;
+  box-shadow: 0 16px 40px rgba(43, 40, 35, .12);
+  transition: background-color .25s;
+}
+.contact-strip__item:first-child { border-radius: 4px 0 0 4px; }
+.contact-strip__item:last-child { border-radius: 0 4px 4px 0; }
+.contact-strip__item + .contact-strip__item { border-left: 1px solid var(--line); }
+.contact-strip__item:hover { background: #fdfbf6; }
+.contact-strip__icon { display: grid; flex: none; place-items: center; width: 48px; height: 48px; border-radius: 50%; background: var(--sand-light); color: var(--primary-dark); transition: background-color .25s, color .25s; }
+.contact-strip__item:hover .contact-strip__icon { background: var(--primary); color: var(--white); }
+.contact-strip__label { display: block; color: var(--primary-dark); font-size: 12.5px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; }
+.contact-strip__value { display: block; color: var(--ink); font-family: var(--font-display); font-size: 17px; font-weight: 500; overflow-wrap: anywhere; }
+
+/* Route cards */
+.routes { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; margin-top: 18px; }
+.routes > li { display: flex; }
+.route {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  padding: 32px 30px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  background: var(--white);
+  text-decoration: none;
+  transition: transform .25s, box-shadow .25s, border-color .25s;
+}
+.route::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 3px; background: var(--primary); transform: scaleX(0); transform-origin: left; transition: transform .35s; }
+.route:hover { transform: translateY(-5px); border-color: transparent; box-shadow: 0 18px 40px rgba(43, 40, 35, .12); }
+.route:hover::after { transform: scaleX(1); }
+.route__icon { display: grid; place-items: center; width: 54px; height: 54px; margin-bottom: 6px; border-radius: 50%; background: var(--sand-light); color: var(--primary-dark); }
+.route__title { color: var(--ink); font-family: var(--font-display); font-size: 21px; font-weight: 500; }
+.route__desc { flex: 1; color: var(--ink-soft); font-size: 15.5px; line-height: 1.6; }
+.route__cta { color: var(--primary-dark); font-size: 15px; font-weight: 600; }
+
+/* Offices + map */
+.offices { display: grid; grid-template-columns: minmax(0, 400px) minmax(0, 1fr); gap: 28px; align-items: stretch; }
+.offices__list { display: flex; flex-direction: column; gap: 10px; }
+.office { position: relative; padding: 18px 20px; border: 1px solid var(--line); border-left: 3px solid transparent; border-radius: 4px; background: var(--white); transition: border-color .25s, box-shadow .25s, background-color .25s; }
+.office.is-active { border-left-color: var(--primary); background: #fdfbf6; box-shadow: 0 12px 30px rgba(43, 40, 35, .09); }
+.office__select { display: flex; flex-direction: column; gap: 2px; width: 100%; padding: 0; border: 0; background: none; font: inherit; text-align: left; cursor: pointer; }
+/* Whole card is clickable via the button; links stay above it */
+.office__select::after { content: ""; position: absolute; inset: 0; }
+.office__type { color: var(--primary-dark); font-size: 12.5px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; }
+.office__city { color: var(--ink); font-family: var(--font-display); font-size: 20px; font-weight: 500; }
+.office__addr { margin-top: 6px; font-size: 15px; font-style: normal; line-height: 1.55; }
+.office__actions { position: relative; z-index: 1; display: flex; flex-wrap: wrap; gap: 6px 18px; margin-top: 10px; font-size: 15px; }
+.office__actions a { color: var(--ink); font-weight: 600; text-decoration: none; }
+.office__actions a:hover { color: var(--primary-dark); text-decoration: underline; }
+.office:not(.is-active) .office__addr { display: none; }
+.office:not(.is-active) .office__actions { margin-top: 4px; }
+.office:not(.is-active):hover { border-left-color: var(--secondary); }
+
+.offices__map { position: relative; min-height: 460px; overflow: hidden; border-radius: 4px; background: var(--sand-light); box-shadow: 0 16px 40px rgba(43, 40, 35, .12); }
+.offices__map iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; filter: grayscale(.35) sepia(.12); }
+.offices__map-label { position: absolute; left: 16px; bottom: 24px; padding: 10px 16px; border-left: 3px solid var(--primary); border-radius: 3px; background: var(--white); box-shadow: 0 8px 20px rgba(43, 40, 35, .15); color: var(--ink); font-family: var(--font-display); font-size: 17px; font-weight: 500; pointer-events: none; }
+.offices__map-label span { display: block; color: var(--primary-dark); font-family: var(--font-body); font-size: 11.5px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; }
+.offices__map-label.is-swapping { animation: label-in .45s ease; }
+@keyframes label-in { from { opacity: 0; transform: translateY(8px); } }
+
+@media (max-width: 1000px) {
+  .contact-strip__inner { grid-template-columns: 1fr; gap: 0; }
+  .contact-strip__item:first-child { border-radius: 4px 4px 0 0; }
+  .contact-strip__item:last-child { border-radius: 0 0 4px 4px; }
+  .contact-strip__item + .contact-strip__item { border-left: 0; border-top: 1px solid var(--line); }
+  .routes { grid-template-columns: 1fr; }
+  .offices { grid-template-columns: 1fr; }
+  .offices__map { min-height: 340px; order: -1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .offices__map-label.is-swapping { animation: none; }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .marquee { overflow-x: auto; }
   .marquee__track { animation: none; }
